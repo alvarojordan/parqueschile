@@ -1,0 +1,60 @@
+    <%- include('../partials/head.ejs')  %> 
+    <title>Editar <%= park.nombre %> </title>
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/navbar.ejs')  %> 
+    <div class="d-flex flex-row justify-content-center p-2">
+        <%- include('../partials/flashMsgs.ejs') %> 
+    </div>
+    <section class="d-flex flex-column align-items-center">
+        <h1>Editar Parque</h1>
+        <div id="editParkFormContainer" class="col-5 border border-muted rounded-3 p-4">
+            <form action="/parks/<%= park._id %>?_method=put" method="post" class="form-validation" enctype="multipart/form-data" novalidate>
+                <label for="inputNombre" class="form-label">Nombre del parque <span style="color: red">*</span></label>
+                <input type="text" name="park[nombre]" id="inputNombre" class="form-control" value="<%= park.nombre %>" required>
+        
+                <label for="inputRegion" class="form-label mt-2">Region <span style="color: red">*</span></label>
+                <input type="text" name="park[region]" id="inputRegion" class="form-control" value="<%= park.region %>" required>
+        
+                <label for="inputProvincia" class="form-label mt-2">Provincia <span style="color: red">*</span></label>
+                <input type="text" name="park[provincia]" id="inputProvincia" class="form-control" value="<%= park.provincia %>" required>
+                
+                <label for="inputComuna" class="form-label mt-2">Comuna <span style="color: red">*</span></label>
+                <input type="text" name="park[comuna]" id="inputComuna" class="form-control" value="<%= park.comuna%>" required>
+        
+                <label for="inputSuperficie" class="form-label mt-2">Superficie</label>
+                <input type="text" name="park[superficie]" id="inputSuperficie" class="form-control" value="<%= park.superficie %>">
+                
+                <div class="my-2">
+                    <label for="inputImagenes" class="form-label">Agregar imágenes</label>
+                    <input class="form-control" type="file" id="inputImagenes" name="image" multiple>
+                </div>
+                
+                <label for="inputDescripcion" class="form-label mt-2">Descripción</label>
+                <textarea type="text" name="park[descripcion]" id="inputDescripcion" class="form-control" rows="3" value="<%= park.descripcion %>"></textarea>
+
+                <% park.images.forEach((img,i) => { %>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="deleteImages[]" value="<%=img.filename%>" id="image-<%=i%>">
+                    <label class="form-check-label" for="image-<%=i%>">
+                        Delete
+                    </label>
+                </div>
+                <div>
+                    <img src="<%= img.thumbnail %>" class="img-thumbnail">
+                </div>
+                <% }) %>
+
+                <button id="editParkSubmitButton" type="submit" class="btn btn-success mt-4">Guardar cambios</button>
+
+            </form>
+            
+            <form action="/parks/<%= park._id %>" method="get">
+                <button id="cancelEditPark" type="submit" class="btn btn-danger mt-4">Cancelar</button>
+            </form>
+        </div>
+    </section>
+    <%- include('../partials/footer.ejs')  %> 
+</body>
+</html>

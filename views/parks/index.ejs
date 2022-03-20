@@ -1,0 +1,45 @@
+    <%- include('../partials/head.ejs')  %> 
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet'>
+    <script>
+        const mapboxToken = '<%=process.env.MAPBOX_TOKEN%>'
+        let geoJSONdata = '<%-JSON.stringify(geoJSONdata)%>'
+    </script>
+    <title>Índice de parques</title>
+</head>
+
+<body class="d-flex flex-column">
+    <%- include('../partials/navbar.ejs')  %> 
+    <div class="d-flex flex-row justify-content-center">
+        <%- include('../partials/flashMsgs.ejs') %> 
+    </div>
+    <main class="d-flex flex-row">
+        <section class="col-md-3 col-0 align-self-start" style="position: sticky; top: 56px">
+            <div id="map" class="w-100 rounded-3 full-height"></div>
+        </section>
+        <section class="d-flex flex-wrap justify-content-start col-md-9 col-12 container-fluid">
+            <div class="row">
+                <% for(let park of parks) { %>
+                <div class="col-xxl-3 col-lg-4 col-sm-6 col-12 p-0">
+                    <div class="card m-2">
+                        <% if (park.images.length) { %>
+                        <img src="<%= park.images[0].url %>" class="card-img-top">
+                        <% } else { %>
+                        <img src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg" class="card-img-top">
+                        <% } %>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= park.nombre %> </h5>
+                            <p class="card-text"><small class="text-muted"><%= park.region %>, <%= park.provincia %>, <%= park.comuna %></small></p>
+                            <a href="/parks/<%= park._id %>" class="btn btn-success">Ver Parque</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <%- include('../partials/footer.ejs')  %> 
+    <script src='/js/mapAllParks.js'></script>
+</body>
+</html>

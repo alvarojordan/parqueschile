@@ -1,0 +1,59 @@
+    <%- include('../partials/head.ejs')  %> 
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet'>
+    <script>
+        const mapboxToken = '<%=process.env.MAPBOX_TOKEN%>'
+    </script>
+    <title>Nuevo parque</title>
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/navbar.ejs')  %>
+    <div class="d-flex flex-row justify-content-center p-2">
+        <%- include('../partials/flashMsgs.ejs') %> 
+    </div>
+    <section class="d-flex flex-column align-items-center">
+        <h1>Agregar nuevo parque</h1>
+        <div id="newParkFormContainer" class="col-5 border border-muted rounded-3 p-4 my-2">
+            <form action="/parks" method="post" class="form-validation" enctype="multipart/form-data" novalidate>
+                <label for="inputNombre" class="form-label">Nombre del parque <span style="color: red">*</span></label>
+                <input type="text" name="park[nombre]" id="inputNombre" class="form-control" required>
+        
+                <label for="inputRegion" class="form-label mt-2">Region <span style="color: red">*</span></label>
+                <input type="text" name="park[region]" id="inputRegion" class="form-control" required>
+        
+                <label for="inputProvincia" class="form-label mt-2">Provincia <span style="color: red">*</span></label>
+                <input type="text" name="park[provincia]" id="inputProvincia" class="form-control" required>
+                
+                <label for="inputComuna" class="form-label mt-2">Comuna <span style="color: red">*</span></label>
+                <input type="text" name="park[comuna]" id="inputComuna" class="form-control" required>
+
+                <p class="form-label mt-2">Selecciona la ubicación del parque en el mapa</p>
+                <div id="map" class="w-100 rounded-3" style="height: 300px"></div>
+                <input type="hidden" name="longitude" id="inputLongitude" value="-70.6538331">
+                <input type="hidden" name="latitude" id="inputLatitude" value="-33.443183">
+        
+                <label for="inputSuperficie" class="form-label mt-2">Superficie</label>
+                <input type="text" name="park[superficie]" id="inputSuperficie" class="form-control">
+
+                <div class="my-2">
+                    <label for="inputImagenes" class="form-label">Agregar imágenes</label>
+                    <input class="form-control" type="file" id="inputImagenes" name="image" multiple>
+                </div>
+        
+                <label for="inputDescripcion" class="form-label mt-2">Descripción</label>
+                <textarea type="text" name="park[descripcion]" id="inputDescripcion" class="form-control" cols="30" rows="3"></textarea>
+    
+                <button id="newParkSubmitButton" type="submit" class="btn btn-success mt-4">Agregar parque</button>
+    
+            </form>
+            
+            <form action="/parks" method="get">
+                <button id="cancelNewPark" type="submit" class="btn btn-danger mt-4">Cancelar</button>
+            </form>
+        </div>
+    </section>
+    <%- include('../partials/footer.ejs')  %>
+    <script src='/js/mapNewPark.js'></script>
+</body>
+</html>

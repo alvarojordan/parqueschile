@@ -1,0 +1,23 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://res.cloudinary.com/dpz0sgwyq/image/upload/v1647717872/ParquesChile/wallpaper-homepage-03.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav-link {
+    color: rgb(206, 206, 206)!important;
+    border-bottom: 0.2rem solid transparent;
+    text-shadow: 1px 1px 2px rgb(122, 122, 122);
+}
+
+.nav-link:hover {
+    color: white!important;
+    border-bottom-color: white;
+}
+
+#login-button {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 92, 54);
+    border: 1px solid rgb(141, 141, 141);
+}
