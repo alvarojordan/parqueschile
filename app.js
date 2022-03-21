@@ -42,7 +42,8 @@ const store = MongoStore.create({
     }
 })
 
-const port = 3000
+// process.env.PORT no hay que crearla, estará automáticamente disponible en heroku
+const port = process.env.PORT || 3000
 const app = express()
 
 // MIDDLEWARE
